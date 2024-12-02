@@ -12,8 +12,10 @@ LemmeKissDaNPC is a mod designed for the ATLYSS game. This mod removes the hitbo
 
 ### Installation Instructions
 
-#### 1. Install BepInEx
-To use this mod, you'll first need to install **BepInEx**, a popular modding framework for Unity games.
+#### 1. Install BepInEx / Melon Loader (COMING SOON)
+To use this mod, you'll first need to install **BepInEx**, a popular modding framework for Unity games. 
+
+**IMPORTANT NOTE**: Support for **Melon Loader** is coming soon!!! This will ensure support with other mods, like the ones from [Lily](https://github.com/Buttered-Lily), and other popular mods.
 
 - **Step 1**: Download the BepInExPack for your platform from [Thunderstore](https://thunderstore.io/).
   - Go to the [BepInExPack page](https://thunderstore.io/c/atlyss/p/BepInEx/BepInExPack/).
