@@ -2,17 +2,42 @@
 
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netstandard2.1</TargetFramework> <!-- Use netstandard2.1 for BepInEx compatibility -->
+    <TargetFramework>netstandard21</TargetFramework> <!-- Use netstandard2.1 for BepInEx compatibility -->
     <OutputPath>.\bin\</OutputPath>
   </PropertyGroup>
 
+  <!-- References -->
   <ItemGroup>
+    <!-- BepInEx -->
     <Reference Include="BepInEx">
       <HintPath>libs\BepInEx.dll</HintPath>
     </Reference>
+
+    <!-- Game Code -->
     <Reference Include="Assembly-CSharp">
       <HintPath>libs\Assembly-CSharp.dll</HintPath>
     </Reference>
+
+    <!-- Mirror -->
+    <Reference Include="Mirror">
+      <HintPath>libs\Mirror.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Authenticators">
+      <HintPath>libs\Mirror.Authenticators.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Components">
+      <HintPath>libs\Mirror.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Mirror.Transports">
+      <HintPath>libs\Mirror.Transports.dll</HintPath>
+    </Reference>
+
+    <!-- EasySettings -->
+    <Reference Include="Nessie.ATLYSS.EasySettings">
+      <HintPath>libs\EasySettings.dll</HintPath>
+    </Reference>
+
+    <!-- Unity Engine -->
     <Reference Include="UnityEngine.AccessibilityModule">
       <HintPath>libs\UnityEngine.AccessibilityModule.dll</HintPath>
     </Reference>

@@ -10,6 +10,12 @@
 ### What is this beautiful batch of code?
 LemmeKissDaNPC is a mod designed for the ATLYSS game. This mod removes the hitbox from all NPCs (when possible) to allow you to get as close as possible to your favorite ATLYSS NPCs—because who wouldn’t want to share a sweet moment without collision getting in the way?
 
+### Prequisites
+
+#### 1. EasySettings
+In order to use this mod, you will have to put the EasySettings.dll from [here](https://thunderstore.io/c/atlyss/p/Nessie/EasySettings/)
+ in your plugins folder. This allows me to introduce compatibility with the settings menu and is used to manage the new easter egg feature at the moment, more uses for it will come later :3
+
 ### Installation Instructions
 
 #### 1. Install BepInEx / Melon Loader (COMING SOON)
@@ -43,7 +49,7 @@ If you'd like to build the mod from source, here’s how:
 
 - **Step 2**: Open the project in **Visual Studio** or any C# compatible IDE.
 
-- **Step 3**: Make sure you have the **BepInEx** reference set up in your project:
+- **Step 3**: Make sure you have the **BepInEx** & **C-Sharp Assemblies** reference set up in your project:
   - Download the latest BepInEx assemblies and reference them in your project.
   - You can find BepInEx assemblies in the `BepInEx` folder inside your game directory.
 
