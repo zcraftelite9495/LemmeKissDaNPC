@@ -2,3 +2,6 @@
 /bin
 /obj
 /libs
+build.py
+build.bat
+makerelease.bat

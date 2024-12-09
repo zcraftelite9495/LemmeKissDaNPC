@@ -7,13 +7,17 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 
-[BepInPlugin("com.zcraftelite.lemmekissdanpc", "Lemme Kiss Da NPC", "1.1.1")]
+[BepInPlugin("com.zcraftelite.lemmekissdanpc", "Lemme Kiss Da NPC", "1.2.0")]
 public class LemmeKissDaNPC : BaseUnityPlugin
 {
     private HashSet<string> processedNpcsWithoutCollider = new HashSet<string>();
     private bool skritProcessed = false;
 
     private static ConfigEntry<bool> ConfigEnableEasterEgg;
+
+    // --------------------------------------------
+    // Plugin Startup
+    // --------------------------------------------
 
     private void Awake()
     {
@@ -26,11 +30,15 @@ public class LemmeKissDaNPC : BaseUnityPlugin
     private void Start()
     {
         Logger.LogInfo("LemmeKissDaNPC Loaded!");
-        Logger.LogInfo("LemmeKissDaNPC is version 1.1.0.");
+        Logger.LogInfo("LemmeKissDaNPC is version 1.2.0.");
 
         FuckSkritOver();
         StartCoroutine(CheckAndModifyNpcColliders());
     }
+
+    // --------------------------------------------
+    // EasySettings Integration
+    // --------------------------------------------
 
     // Initialize EasySettings configuration
     private void InitConfig()
@@ -56,6 +64,10 @@ public class LemmeKissDaNPC : BaseUnityPlugin
         return ConfigEnableEasterEgg.Value;
     }
 
+    // ---------------------------------------------
+    // Remove NPC Collision
+    // ---------------------------------------------
+
     private IEnumerator CheckAndModifyNpcColliders()
     {
         while (true)
@@ -68,11 +80,41 @@ public class LemmeKissDaNPC : BaseUnityPlugin
                 GameObject npc = collider.gameObject;
                 if (npc.name.StartsWith("_npc_") && !processedNpcsWithoutCollider.Contains(npc.name))
                 {
-                    if (collider.radius != 0f || collider.height != 0f)
+                    // Process the NPC's CapsuleCollider
+                    if (collider.radius != 0f || collider.height != 0f || collider.enabled != false)
                     {
                         collider.radius = 0f;
                         collider.height = 0f;
+                        collider.enabled = false;
                         Logger.LogInfo($"Modified CapsuleCollider for {npc.name}.");
+                    }
+
+                    // Check for a child named _jumpOffCollider
+                    Transform jumpOffCollider = npc.transform.Find("_jumpOffCollider");
+                    if (jumpOffCollider != null)
+                    {
+                        CapsuleCollider childCollider = jumpOffCollider.GetComponent<CapsuleCollider>();
+                        if (childCollider != null && (childCollider.radius != 0f || childCollider.height != 0f || childCollider.enabled != false))
+                        {
+                            childCollider.radius = 0f;
+                            childCollider.height = 0f;
+                            childCollider.enabled = false;
+                            Logger.LogInfo($"Modified CapsuleCollider for {npc.name}'s _jumpOffCollider.");
+                        }
+                    }
+
+                    // Check for a child named _collider
+                    Transform weirdCollider = npc.transform.Find("_collider");
+                    if (weirdCollider != null)
+                    {
+                        CapsuleCollider weirdChildCollider = weirdCollider.GetComponent<CapsuleCollider>();
+                        if (weirdChildCollider != null && (weirdChildCollider.radius != 0f || weirdChildCollider.height != 0f || weirdChildCollider.enabled != false))
+                        {
+                            weirdChildCollider.radius = 0f;
+                            weirdChildCollider.height = 0f;
+                            weirdChildCollider.enabled = false;
+                            Logger.LogInfo($"Modified CapsuleCollider for {npc.name}'s _collider.");
+                        }
                     }
                 }
             }
@@ -84,13 +126,16 @@ public class LemmeKissDaNPC : BaseUnityPlugin
                 {
                     if (npc.GetComponent<CapsuleCollider>() == null)
                     {
-                        Logger.LogWarning($"{npc.name} does not have a CapsuleCollider component!");
                         processedNpcsWithoutCollider.Add(npc.name);
                     }
                 }
             }
         }
     }
+
+    // ---------------------------------------------
+    // Easter Egg Stuffs
+    // ---------------------------------------------
 
     private void FuckSkritOver()
     {

@@ -1,4 +1,4 @@
-<img src="Cover Image.png" alt="Cover Image">
+<img src="CoverImage.png" alt="Cover Image">
 
 # Lemme Kiss Da NPC
 
@@ -9,7 +9,9 @@
 <img src="https://wakatime.com/badge/user/018db32b-732a-4704-b635-68d311538b3f/project/5dca42a2-1dbe-4c4a-bb78-2d805bb8d910.svg" alt="wakatime"> <img src="https://img.shields.io/github/languages/top/zcraftelite9495/lemmekissdanpc" alt="Top Language"> <img src="https://img.shields.io/github/stars/zcraftelite9495/lemmekissdanpc" alt="Stars Badge"> <img src="https://img.shields.io/github/forks/zcraftelite9495/lemmekissdanpc" alt="Forks Badge">
 
 ### What is this beautiful batch of code?
-LemmeKissDaNPC is a mod designed for the ATLYSS game. This mod removes the hitbox from all NPCs (when possible) to allow you to get as close as possible to your favorite ATLYSS NPCs—because who wouldn’t want to share a sweet moment without collision getting in the way?
+LemmeKissDaNPC is a mod designed for the ATLYSS game. This mod removes the hitbox from all NPCs (when possible) to allow you to get as close as possible to your favorite ATLYSS NPCs—because who wouldn’t want to share a sweet, hot, and sexy moment with your favorite NPC~
+
+All jokes aside, this mod removes the magical forcefields (hitboxes) around NPCs. So if you have ever been annoyed from running into NPCs constantly while dashing, wanted to take some cute screenshots with your favorite NPCs, or wanting to do... whatever ya'll gooners wanna do, then this is the mod for you! 
 
 ### Prequisites
 

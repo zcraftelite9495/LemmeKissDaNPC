@@ -1,6 +1,10 @@
+# Changelog: 1.2.0
+* ➕ MAJOR BREAKTHROUGH: Gained access to the `_jumpOffCollider` object and disabled it, keeping the entity from turning on collision.
+* 🔄 Updated the code to be compatible with ATLYSS Beta 1.5.8a.
+
 # Changelog: 1.1.1
-* 🔄 Updated the code to be compatible with EasySettings 1.1.3
+* 🔄 Updated the code to be compatible with EasySettings 1.1.3.
 
 # Changelog: 1.1.0
-* ➕ Added an easter egg to the game to make things more interesting
-* 🔄 Re-laid out the code to make it more readable
+* ➕ Added an easter egg to the game to make things more interesting.
+* 🔄 Re-laid out the code to make it more readable.
