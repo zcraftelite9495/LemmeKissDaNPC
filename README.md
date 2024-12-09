@@ -4,7 +4,7 @@
 
 ## A Mod for ATLYSS
 
-<img src="https://img.shields.io/badge/Version-1.1.1-green" alt="Version Badge"> <img src="https://img.shields.io/badge/Development_Stage-stable-blue" alt="Development Stage Badge">
+<img src="https://img.shields.io/badge/Version-1.2.0-green" alt="Version Badge"> <img src="https://img.shields.io/badge/Development_Stage-stable-green" alt="Development Stage Badge">
 
 <img src="https://wakatime.com/badge/user/018db32b-732a-4704-b635-68d311538b3f/project/5dca42a2-1dbe-4c4a-bb78-2d805bb8d910.svg" alt="wakatime"> <img src="https://img.shields.io/github/languages/top/zcraftelite9495/lemmekissdanpc" alt="Top Language"> <img src="https://img.shields.io/github/stars/zcraftelite9495/lemmekissdanpc" alt="Stars Badge"> <img src="https://img.shields.io/github/forks/zcraftelite9495/lemmekissdanpc" alt="Forks Badge">
 
