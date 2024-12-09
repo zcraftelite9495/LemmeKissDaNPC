@@ -7,7 +7,7 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 
-[BepInPlugin("com.zcraftelite.lemmekissdanpc", "Lemme Kiss Da NPC", "1.1.0")]
+[BepInPlugin("com.zcraftelite.lemmekissdanpc", "Lemme Kiss Da NPC", "1.1.1")]
 public class LemmeKissDaNPC : BaseUnityPlugin
 {
     private HashSet<string> processedNpcsWithoutCollider = new HashSet<string>();

@@ -1,0 +1,9 @@
+{
+    "name": "LemmeKissDaNPC",
+    "version_number": "1.1.1",
+    "website_url": "https://github.com/zcraftelite9495/LemmeKissDaNPC",
+    "description": "ATLYSS mod to allow you to not get pushed back by the foul NPC forcefields.",
+    "dependencies": [
+        "Nessie-EasySettings-1.1.3"
+    ]
+}
