@@ -7,7 +7,7 @@ using System.IO;
 using System.Reflection;
 using UnityEngine;
 
-[BepInPlugin("com.zcraftelite.lemmekissdanpc", "Lemme Kiss Da NPC", "1.2.0")]
+[BepInPlugin("com.zcraftelite.lemmekissdanpc", "Lemme Kiss Da NPC", "1.3.0")]
 public class LemmeKissDaNPC : BaseUnityPlugin
 {
     private HashSet<string> processedNpcsWithoutCollider = new HashSet<string>();
@@ -30,7 +30,7 @@ public class LemmeKissDaNPC : BaseUnityPlugin
     private void Start()
     {
         Logger.LogInfo("LemmeKissDaNPC Loaded!");
-        Logger.LogInfo("LemmeKissDaNPC is version 1.2.0.");
+        Logger.LogInfo("LemmeKissDaNPC is version 1.3.0.");
 
         FuckSkritOver();
         StartCoroutine(CheckAndModifyNpcColliders());
@@ -68,66 +68,62 @@ public class LemmeKissDaNPC : BaseUnityPlugin
     // Remove NPC Collision
     // ---------------------------------------------
 
+    private Dictionary<string, (bool hasMainColliderChecked, bool hasJumpOffColliderChecked, bool hasWeirdColliderChecked)> npcColliderStatus = new Dictionary<string, (bool, bool, bool)>();
+
     private IEnumerator CheckAndModifyNpcColliders()
     {
         while (true)
         {
             yield return new WaitForSeconds(1f);
 
-            CapsuleCollider[] colliders = Object.FindObjectsOfType<CapsuleCollider>();
-            foreach (CapsuleCollider collider in colliders)
-            {
-                GameObject npc = collider.gameObject;
-                if (npc.name.StartsWith("_npc_") && !processedNpcsWithoutCollider.Contains(npc.name))
-                {
-                    // Process the NPC's CapsuleCollider
-                    if (collider.radius != 0f || collider.height != 0f || collider.enabled != false)
-                    {
-                        collider.radius = 0f;
-                        collider.height = 0f;
-                        collider.enabled = false;
-                        Logger.LogInfo($"Modified CapsuleCollider for {npc.name}.");
-                    }
-
-                    // Check for a child named _jumpOffCollider
-                    Transform jumpOffCollider = npc.transform.Find("_jumpOffCollider");
-                    if (jumpOffCollider != null)
-                    {
-                        CapsuleCollider childCollider = jumpOffCollider.GetComponent<CapsuleCollider>();
-                        if (childCollider != null && (childCollider.radius != 0f || childCollider.height != 0f || childCollider.enabled != false))
-                        {
-                            childCollider.radius = 0f;
-                            childCollider.height = 0f;
-                            childCollider.enabled = false;
-                            Logger.LogInfo($"Modified CapsuleCollider for {npc.name}'s _jumpOffCollider.");
-                        }
-                    }
-
-                    // Check for a child named _collider
-                    Transform weirdCollider = npc.transform.Find("_collider");
-                    if (weirdCollider != null)
-                    {
-                        CapsuleCollider weirdChildCollider = weirdCollider.GetComponent<CapsuleCollider>();
-                        if (weirdChildCollider != null && (weirdChildCollider.radius != 0f || weirdChildCollider.height != 0f || weirdChildCollider.enabled != false))
-                        {
-                            weirdChildCollider.radius = 0f;
-                            weirdChildCollider.height = 0f;
-                            weirdChildCollider.enabled = false;
-                            Logger.LogInfo($"Modified CapsuleCollider for {npc.name}'s _collider.");
-                        }
-                    }
-                }
-            }
-
             GameObject[] npcs = GameObject.FindObjectsOfType<GameObject>();
             foreach (GameObject npc in npcs)
             {
-                if (npc.name.StartsWith("_npc_") && !processedNpcsWithoutCollider.Contains(npc.name))
+                if (npc.name.StartsWith("_npc_"))
                 {
-                    if (npc.GetComponent<CapsuleCollider>() == null)
+                    // Initialize status if the NPC is new
+                    if (!npcColliderStatus.ContainsKey(npc.name))
                     {
-                        processedNpcsWithoutCollider.Add(npc.name);
+                        npcColliderStatus[npc.name] = (false, false, false);
                     }
+
+                    var status = npcColliderStatus[npc.name];
+
+                    // Check if the main CapsuleCollider exists and hasn't been checked
+                    if (!status.hasMainColliderChecked)
+                    {
+                        CapsuleCollider mainCollider = npc.GetComponent<CapsuleCollider>();
+                        if (mainCollider == null)
+                        {
+                            Logger.LogInfo($"No CapsuleCollider found for {npc.name}.");
+                            status.hasMainColliderChecked = true; // Mark as checked, no need to look again
+                        }
+                    }
+
+                    // Check if the _jumpOffCollider exists and hasn't been checked
+                    if (!status.hasJumpOffColliderChecked)
+                    {
+                        Transform jumpOffCollider = npc.transform.Find("_jumpOffCollider");
+                        if (jumpOffCollider == null || jumpOffCollider.GetComponent<CapsuleCollider>() == null)
+                        {
+                            Logger.LogInfo($"No _jumpOffCollider found for {npc.name}.");
+                            status.hasJumpOffColliderChecked = true; // Mark as checked, no need to look again
+                        }
+                    }
+
+                    // Check if the _collider exists and hasn't been checked
+                    if (!status.hasWeirdColliderChecked)
+                    {
+                        Transform weirdCollider = npc.transform.Find("_collider");
+                        if (weirdCollider == null || weirdCollider.GetComponent<CapsuleCollider>() == null)
+                        {
+                            Logger.LogInfo($"No _collider found for {npc.name}.");
+                            status.hasWeirdColliderChecked = true; // Mark as checked, no need to look again
+                        }
+                    }
+
+                    // Update the dictionary with the latest status
+                    npcColliderStatus[npc.name] = status;
                 }
             }
         }
